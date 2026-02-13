@@ -31,7 +31,7 @@ def add(student=None):
     student_dict = student.to_dict()
     result = db.students.insert_one(student_dict)
 
-    return str(result.inserted_id)
+    return str(result.inserted_id), 200
 
 
 def get_by_id(student_id=None, subject=None):
