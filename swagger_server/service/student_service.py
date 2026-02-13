@@ -1,9 +1,25 @@
 import os
+import os
+import time
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-# Connect to MongoDB service defined in kubernetes
-client = MongoClient("mongodb://mongo:27017")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongo:27017")
+
+#Logic for Github action correct testing
+
+client = None
+for _ in range(10):
+    try:
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=2000)
+        client.server_info()
+        break
+    except Exception:
+        time.sleep(2)
+
+if client is None:
+    raise Exception("MongoDB not available")
+
 db = client.student_db
 
 
