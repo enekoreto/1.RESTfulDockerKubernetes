@@ -3,9 +3,9 @@
 	"name": "devops_tutorial",
 	"values": [
 		{
-  			"key": "baseUrl",
-  			"value": "http://student_service:8080/tutorial/1.0.0/",
-  			"enabled": true
+			"key": "baseUrl",
+			"value": "http://localhost:8080/tutorial/1.0.0/",
+			"enabled": true
 		},
 		{
 			"key": "student_id",
