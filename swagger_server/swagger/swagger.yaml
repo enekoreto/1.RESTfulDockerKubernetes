@@ -25,8 +25,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -52,8 +51,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -102,9 +100,8 @@ components:
       type: object
       properties:
         student_id:
-          type: integer
-          format: int64
-          example: 123
+          type: string
+          example: "6990404d2b618b19a95d9dc1"
         first_name:
           type: string
           example: John
@@ -116,7 +113,7 @@ components:
           items:
             $ref: "#/components/schemas/GradeRecord"
       example:
-        student_id: 123
+        student_id: "6990404d2b618b19a95d9dc1"
         last_name: Doe
         grade_records:
         - grade: 8.5
