@@ -13,11 +13,10 @@ jobs:
     - name: Build docker
       run: |
         docker build . -t $REPO_NAME/$IMAGE_NAME
-    - name: run docker-compose
+    - name: run docker compose
       run: |
-        # Make sure the IMAGE_NAME variable is available to docker-compose if needed
         export IMAGE_NAME=$REPO_NAME/$IMAGE_NAME
-        docker-compose up -d
+        docker compose up -d
         docker ps
         sleep 10
 
