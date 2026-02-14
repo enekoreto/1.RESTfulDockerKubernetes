@@ -3,6 +3,7 @@ import os
 import time
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from werkzeug.exceptions import NotFound
 
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongo:27017")
 
@@ -62,3 +63,27 @@ def delete(student_id=None):
         return 'not found', 404
 
     return student_id
+
+def get_average_grade(student_id):
+    # 1. Fetch the student from MongoDB using the string ID
+    try:
+        student = db.students.find_one({"_id": ObjectId(student_id)})
+    except Exception:
+        # Catch invalid ObjectIds just in case
+        return "Invalid ID format", 404
+
+    # 2. Return 404 if the student doesn't exist
+    if not student:
+        return "Student not found", 404
+
+    # 3. Get the grades array. Return 404 if it's missing or empty
+    grade_records = student.get("grade_records", [])
+    if not grade_records:
+        return "Student has no grades", 404
+
+    # 4. Calculate the average
+    total_grades = sum(record.get("grade", 0) for record in grade_records)
+    average = total_grades / len(grade_records)
+
+    # 5. Return the calculated average
+    return average

@@ -45,3 +45,16 @@ def get_student_by_id(student_id):  # noqa: E501
     :rtype: Student
     """
     return get_by_id(student_id)
+
+
+def get_student_average_grade(student_id):  # noqa: E501
+    """gets the average grade of a student
+
+    Returns the average grade of the student with id 'student_id'.
+
+    :param student_id: the uid
+    :type student_id: str
+
+    :rtype: float
+    """
+    return student_service.get_average_grade(student_id)
